@@ -112,8 +112,198 @@ themeToggle.addEventListener('click', () => {
 
 // Check for saved theme preference
 
+
+
 if (localStorage.getItem('theme') === 'dark-mode') {
+
+
 
     body.classList.add('dark-mode');
 
+
+
 }
+
+
+
+
+
+
+
+const hourHand = document.querySelector('.hour-hand');
+
+
+
+const minuteHand = document.querySelector('.minute-hand');
+
+
+
+const secondHand = document.querySelector('.second-hand');
+
+
+
+const currentDateElement = document.getElementById('current-date');
+
+
+
+const digitalClockElement = document.getElementById('digital-clock');
+
+
+
+
+
+
+
+function setDate() {
+
+
+
+    const now = new Date();
+
+
+
+    
+
+
+
+    // Seoul is KST (UTC+9)
+
+
+
+    const seoulTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Seoul"}));
+
+
+
+
+
+
+
+    const seconds = seoulTime.getSeconds();
+
+
+
+    const secondsDegrees = ((seconds / 60) * 360) + 90;
+
+
+
+    secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+
+
+
+
+
+
+
+    const minutes = seoulTime.getMinutes();
+
+
+
+    const minutesDegrees = ((minutes / 60) * 360) + ((seconds/60)*6) + 90;
+
+
+
+    minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
+
+
+
+
+
+
+
+    const hours = seoulTime.getHours();
+
+
+
+    const hoursDegrees = ((hours / 12) * 360) + ((minutes/60)*30) + 90;
+
+
+
+    hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+
+
+
+
+
+
+
+    const digitalHours = String(hours).padStart(2, '0');
+
+
+
+    const digitalMinutes = String(minutes).padStart(2, '0');
+
+
+
+    const digitalSeconds = String(seconds).padStart(2, '0');
+
+
+
+    digitalClockElement.textContent = `${digitalHours}:${digitalMinutes}:${digitalSeconds}`;
+
+
+
+}
+
+
+
+
+
+
+
+function setCurrentDate() {
+
+
+
+    const now = new Date();
+
+
+
+    const seoulTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Seoul"}));
+
+
+
+    const year = seoulTime.getFullYear();
+
+
+
+    const month = String(seoulTime.getMonth() + 1).padStart(2, '0');
+
+
+
+    const day = String(seoulTime.getDate()).padStart(2, '0');
+
+
+
+    currentDateElement.textContent = `${year}/${month}/${day}`;
+
+
+
+}
+
+
+
+
+
+
+
+setInterval(setDate, 1000);
+
+
+
+
+
+
+
+setDate();
+
+
+
+setCurrentDate();
+
+
+
+
+
+
+
+

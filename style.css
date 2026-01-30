@@ -63,3 +63,77 @@ weather-card {
     box-shadow: 0 4px 8px var(--shadow-color);
     padding: 1rem;
 }
+
+.clock-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.analog-clock {
+    width: 200px;
+    height: 200px;
+    border: 5px solid var(--text-color);
+    border-radius: 50%;
+    position: relative;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+#digital-clock {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.hand {
+    position: absolute;
+    width: 50%;
+    height: 6px;
+    background: var(--text-color);
+    top: 50%;
+    transform-origin: 100%;
+    transform: rotate(90deg);
+    transition: all 0.05s;
+    transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+}
+
+.hour-hand {
+    width: 35%;
+    left: 15%;
+    height: 8px;
+    background: var(--primary-color);
+}
+
+.minute-hand {
+    width: 45%;
+    left: 5%;
+    height: 4px;
+    background: var(--secondary-color);
+}
+
+.second-hand {
+    width: 48%;
+    left: 2%;
+    height: 2px;
+}
+
+.center-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    background: var(--text-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.custom-text {
+    text-align: center;
+    font-size: 0.8rem;
+}
