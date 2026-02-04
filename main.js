@@ -298,7 +298,827 @@ setDate();
 
 
 
+
+
+
+
 setCurrentDate();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class CommentBoard extends HTMLElement {
+
+
+
+
+
+
+
+    constructor() {
+
+
+
+
+
+
+
+        super();
+
+
+
+
+
+
+
+        this.attachShadow({ mode: 'open' });
+
+
+
+
+
+
+
+        this.comments = [];
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    connectedCallback() {
+
+
+
+
+
+
+
+        this.render();
+
+
+
+
+
+
+
+        this.shadowRoot.querySelector('form').addEventListener('submit', this.addComment.bind(this));
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    addComment(e) {
+
+
+
+
+
+
+
+        e.preventDefault();
+
+
+
+
+
+
+
+        const nameInput = this.shadowRoot.querySelector('#comment-name');
+
+
+
+
+
+
+
+        const messageInput = this.shadowRoot.querySelector('#comment-message');
+
+
+
+
+
+
+
+        const newComment = {
+
+
+
+
+
+
+
+            name: nameInput.value,
+
+
+
+
+
+
+
+            message: messageInput.value,
+
+
+
+
+
+
+
+            timestamp: new Date(),
+
+
+
+
+
+
+
+        };
+
+
+
+
+
+
+
+        this.comments.push(newComment);
+
+
+
+
+
+
+
+        nameInput.value = '';
+
+
+
+
+
+
+
+        messageInput.value = '';
+
+
+
+
+
+
+
+        this.render();
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    render() {
+
+
+
+
+
+
+
+        this.shadowRoot.innerHTML = `
+
+
+
+
+
+
+
+            <style>
+
+
+
+
+
+
+
+                :host {
+
+
+
+
+
+
+
+                    display: block;
+
+
+
+
+
+
+
+                    margin-top: 2rem;
+
+
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+                .comment-form {
+
+
+
+
+
+
+
+                    display: flex;
+
+
+
+
+
+
+
+                    flex-direction: column;
+
+
+
+
+
+
+
+                    gap: 1rem;
+
+
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+                .comment-form input, .comment-form textarea {
+
+
+
+
+
+
+
+                    padding: 0.5rem;
+
+
+
+
+
+
+
+                    border-radius: 4px;
+
+
+
+
+
+
+
+                    border: 1px solid #ccc;
+
+
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+                .comment-form button {
+
+
+
+
+
+
+
+                    align-self: flex-start;
+
+
+
+
+
+
+
+                    padding: 0.5rem 1rem;
+
+
+
+
+
+
+
+                    border: none;
+
+
+
+
+
+
+
+                    border-radius: 4px;
+
+
+
+
+
+
+
+                    background-color: #333;
+
+
+
+
+
+
+
+                    color: white;
+
+
+
+
+
+
+
+                    cursor: pointer;
+
+
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+                .comment-list {
+
+
+
+
+
+
+
+                    margin-top: 2rem;
+
+
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+                .comment {
+
+
+
+
+
+
+
+                    border-bottom: 1px solid #eee;
+
+
+
+
+
+
+
+                    padding: 1rem 0;
+
+
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+                .comment:last-child {
+
+
+
+
+
+
+
+                    border-bottom: none;
+
+
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+                .comment-header {
+
+
+
+
+
+
+
+                    display: flex;
+
+
+
+
+
+
+
+                    justify-content: space-between;
+
+
+
+
+
+
+
+                    align-items: center;
+
+
+
+
+
+
+
+                    font-size: 0.9rem;
+
+
+
+
+
+
+
+                    color: #666;
+
+
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+                .comment-author {
+
+
+
+
+
+
+
+                    font-weight: bold;
+
+
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+            </style>
+
+
+
+
+
+
+
+            <div class="comment-board">
+
+
+
+
+
+
+
+                <h2>Comments</h2>
+
+
+
+
+
+
+
+                <form class="comment-form">
+
+
+
+
+
+
+
+                    <input type="text" id="comment-name" placeholder="Your name" required>
+
+
+
+
+
+
+
+                    <textarea id="comment-message" placeholder="Leave a comment" required></textarea>
+
+
+
+
+
+
+
+                    <button type="submit">Submit</button>
+
+
+
+
+
+
+
+                </form>
+
+
+
+
+
+
+
+                <div class="comment-list">
+
+
+
+
+
+
+
+                    ${this.comments.map(comment => `
+
+
+
+
+
+
+
+                        <div class="comment">
+
+
+
+
+
+
+
+                            <div class="comment-header">
+
+
+
+
+
+
+
+                                <span class="comment-author">${comment.name}</span>
+
+
+
+
+
+
+
+                                <span class="comment-date">${comment.timestamp.toLocaleString()}</span>
+
+
+
+
+
+
+
+                            </div>
+
+
+
+
+
+
+
+                            <p>${comment.message}</p>
+
+
+
+
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                    `).join('')}
+
+
+
+
+
+
+
+                </div>
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+        `;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+customElements.define('comment-board', CommentBoard);
+
+
+
+
+
+
+
+
 
 
 

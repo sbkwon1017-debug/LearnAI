@@ -1,37 +1,30 @@
-# Project Blueprint
+# Application Blueprint
 
 ## Overview
 
-A web application that displays weather information for various cities around the world.
+A simple, framework-less web application that demonstrates modern web development practices. This application displays weather information and includes a comment board.
 
-## Style, Design, and Features
+## Implemented Features
 
-### Initial Version
-*   **Layout:** A simple layout with a header and a main content area.
-*   **Styling:** Clean and modern design with a focus on readability.
-*   **Components:**
-    *   **Weather Card:** A reusable web component to display weather information for a single city.
-*   **Functionality:**
-    *   Fetches weather data from the Open-Meteo API.
-    *   Displays weather for a default set of cities.
-    *   Allows users to search for a city to get its weather.
+### Weather Display
+*   Fetches weather data from an API for a given city.
+*   Displays the weather in a card format.
+*   Includes a dark mode theme toggle.
+*   Shows an analog and digital clock for the current time in Seoul.
 
-## Current Plan
+### Comment Board
+*   A custom web component (`<comment-board>`).
+*   A form to allow users to submit their name and a comment.
+*   A list that displays all submitted comments.
 
-### Goal: Create a world weather information dashboard.
+## Current State
 
-1.  **`blueprint.md`:** Create this file to document the project.
-2.  **`index.html`:**
-    *   Update the title to "World Weather".
-    *   Add a header with the title.
-    *   Add a search input and button.
-    *   Add a container for the weather cards.
-3.  **`style.css`:**
-    *   Add styles for the header, search bar, and weather cards.
-    *   Use CSS variables for colors.
-    *   Make the layout responsive.
-4.  **`main.js`:**
-    *   Define a `WeatherCard` web component.
-    *   Fetch weather data from the Open-Meteo API for a few cities.
-    *   Render the weather cards.
-    *   Implement the search functionality to fetch and display weather for the searched city.
+The application is a functional single-page application.
+
+## Plan for Comment Board (Completed)
+
+1.  **HTML:** Add a `<comment-board>` custom element to `index.html`.
+2.  **JavaScript:** Implement the `CommentBoard` web component in `main.js`.
+    *   It has a form to submit new comments (name and message).
+    *   It displays a list of comments.
+3.  **CSS:** Add styles for the comment board in `style.css` for a clean and modern look.

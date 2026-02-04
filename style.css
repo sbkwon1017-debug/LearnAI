@@ -133,7 +133,30 @@ weather-card {
     transform: translate(-50%, -50%);
 }
 
+
+
 .custom-text {
+
     text-align: center;
+
     font-size: 0.8rem;
+
+}
+
+
+
+comment-board {
+
+    margin: 2rem auto;
+
+    max-width: 800px;
+
+    padding: 1rem;
+
+    background-color: var(--card-background-color);
+
+    border-radius: 8px;
+
+    box-shadow: 0 4px 8px var(--shadow-color);
+
 }
