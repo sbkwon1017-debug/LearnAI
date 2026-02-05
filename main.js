@@ -318,7 +318,215 @@ setCurrentDate();
 
 
 
+async function fetchNews() {
 
+
+
+
+
+
+
+    const newsContainer = document.getElementById('news-container');
+
+
+
+
+
+
+
+    const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
+
+
+
+
+
+
+
+    const RSS_URL = 'https://en.yna.co.kr/RSS/news.xml';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    try {
+
+
+
+
+
+
+
+        const response = await fetch(CORS_PROXY + RSS_URL);
+
+
+
+
+
+
+
+        const text = await response.text();
+
+
+
+
+
+
+
+        const parser = new DOMParser();
+
+
+
+
+
+
+
+        const xml = parser.parseFromString(text, 'text/xml');
+
+
+
+
+
+
+
+        const items = xml.querySelectorAll('item');
+
+
+
+
+
+
+
+        let newsHTML = '<h2>Major Korean News</h2><ul>';
+
+
+
+
+
+
+
+        for (let i = 0; i < 5 && i < items.length; i++) {
+
+
+
+
+
+
+
+            const item = items[i];
+
+
+
+
+
+
+
+            const title = item.querySelector('title').textContent;
+
+
+
+
+
+
+
+            const link = item.querySelector('link').textContent;
+
+
+
+
+
+
+
+            newsHTML += `<li><a href="${link}" target="_blank" rel="noopener noreferrer">${title}</a></li>`;
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+        newsHTML += '</ul>';
+
+
+
+
+
+
+
+        newsContainer.innerHTML = newsHTML;
+
+
+
+
+
+
+
+    } catch (error) {
+
+
+
+
+
+
+
+        console.error('Error fetching news:', error);
+
+
+
+
+
+
+
+        newsContainer.innerHTML = '<p>Could not fetch news.</p>';
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+fetchNews();
 
 
 

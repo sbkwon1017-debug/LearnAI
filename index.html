@@ -3,30 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>World Weather</title>
+    <title>Korean News & Weather</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>World Weather</h1>
-        <div class="search-container">
-            <input type="text" id="city-search" placeholder="Enter city name">
-            <button id="search-btn">Search</button>
-        </div>
-        <button id="theme-toggle">Toggle Theme</button>
+        <h1>Major Korean News</h1>
     </header>
-    <main id="weather-cards-container">
-        <div class="clock-container">
-                                            <div class="analog-clock">
-                                                <div class="hand hour-hand"></div>
-                                                <div class="hand minute-hand"></div>
-                                                <div class="hand second-hand"></div>
-                                                <div class="center-dot"></div>
-                                                <div id="digital-clock"></div>
-                                            </div>                                        </div>
-                                        <p class="custom-text">개태웅스킹수</p>
-                                                <p id="current-date"></p>
-                                                <comment-board></comment-board>
-                                            </main>    <script src="main.js"></script>
+    <main>
+        <div id="news-container"></div>
+        <div id="weather-sidebar">
+            <div class="weather-controls">
+                <input type="text" id="city-search" placeholder="Enter city name">
+                <button id="search-btn">Search</button>
+                <button id="theme-toggle">Toggle Theme</button>
+            </div>
+            <div class="clock-container">
+                <div class="analog-clock">
+                    <div class="hand hour-hand"></div>
+                    <div class="hand minute-hand"></div>
+                    <div class="hand second-hand"></div>
+                    <div class="center-dot"></div>
+                    <div id="digital-clock"></div>
+                </div>
+            </div>
+            <p id="current-date"></p>
+            <p class="custom-text">개태웅스킹수</p>
+            <div id="weather-cards-container"></div>
+            <comment-board></comment-board>
+        </div>
+    </main>
+    <script src="main.js"></script>
 </body>
 </html>
